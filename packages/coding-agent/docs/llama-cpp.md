@@ -6,7 +6,7 @@ Use a current llama.cpp build with router support. Follow the [build instruction
 
 ## Start the router
 
-Start `llama-server` without `--model` or `-m`. Passing a model starts single-model mode instead of router mode.
+Start `llama serve` without `-hf`, `--model` or `-m`. Passing a model starts single-model mode instead of router mode.
 
 ```bash
 llama-server \
