@@ -1,16 +1,15 @@
 # Local Models with llama.cpp
 
-Pi supports the [llama.cpp](https://github.com/ggml-org/llama.cpp) router server. The router discovers multiple GGUF models and loads or unloads them on demand.
+Pi supports the [llama.cpp](https://github.com/ggml-org/llama.cpp) router server. The router discovers multiple GGUF models and loads or unloads them on demand. Learn more about getting started with llama.cpp [here](https://llama.app/) and browse llama.cpp compatible models [here](https://huggingface.co/models?apps=llama.cpp&sort=trending).
 
 Use a current llama.cpp build with router support. Follow the [build instructions](https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md) or install the prebuilt binary easily by running `curl -LsSf https://llama.app/install.sh | sh`.
 
 ## Start the router
 
-Start `llama serve` without `-hf`, `--model` or `-m`. Passing a model starts single-model mode instead of router mode.
+Start `llama serve` without `-hf`, `--model` or `-m`. Passing a model starts single-model mode instead of router mode. This enables Pi to see your existing set of downloaded models.
 
 ```bash
 llama serve \
-  --models-dir ~/.cache/huggingface/hub/ \
   --no-models-autoload \
   -ngl 999 \
   -c 32768
@@ -18,7 +17,6 @@ llama serve \
 
 Important options:
 
-- `--models-dir` discovers local GGUF files. Models are by default downloaded to Hugging Face Hub cache. If you have local models, replace the directory above. 
 - `--no-models-autoload` keeps loading explicit through `/llama`.
 - `-ngl 999` offloads as many layers as possible to the GPU.
 - `-c 32768` sets the context window for each loaded model. Omit it to use the model's native context, which may require substantially more memory.
